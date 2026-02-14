@@ -24,6 +24,8 @@ vars:
   # Date range for dev environment sampling
   dev_start_date: '2019-01-01'
   dev_end_date: '2019-02-01'
+  gcp_project: "project-764327a3-812c-442b-870"
+  bq_dataset: "nytaxi"
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models

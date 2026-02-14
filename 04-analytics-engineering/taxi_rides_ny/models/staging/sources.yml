@@ -3,7 +3,7 @@ sources:
     description: Raw taxi trip data from NYC TLC
     database: |
       {%- if target.type == 'bigquery' -%}
-        {{ env_var('GCP_PROJECT_ID', 'please-add-your-gcp-project-id-here') }}
+        {{ env_var('GCP_PROJECT_ID', 'project-764327a3-812c-442b-870') }}
       {%- else -%}
         taxi_rides_ny
       {%- endif -%}
@@ -16,6 +16,7 @@ sources:
     freshness:
       warn_after: {count: 24, period: hour}
       error_after: {count: 48, period: hour}
+
     tables:
       - name: green_tripdata
         description: Raw green taxi trip records
@@ -98,3 +99,22 @@ sources:
             description: Improvement surcharge
           - name: total_amount
             description: Total amount charged
+
+      - name: fhv_tripdata
+        description: Raw FHV (For-Hire Vehicle) trip records
+        loaded_at_field: pickup_datetime
+        columns:
+          - name: dispatching_base_num
+            description: TLC base license number of the dispatching base
+          - name: pickup_datetime
+            description: Pickup date and time
+          - name: dropoff_datetime
+            description: Dropoff date and time
+          - name: pulocationid
+            description: TLC Taxi Zone where the trip started
+          - name: dolocationid
+            description: TLC Taxi Zone where the trip ended
+          - name: sr_flag
+            description: Shared ride flag
+          - name: affiliated_base_number
+            description: TLC base license number of the affiliated base
